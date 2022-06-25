@@ -10,18 +10,19 @@ function App() {
   const [isLoading, setLoading]= useState(true) ;
 
   useEffect(()=>{
-    const url ="https://dummyjson.com/posts";
-    const fetchItems = async()=>{
+    const url ="https://jsonplaceholder.typicode.com/posts";
+     const fetchItems = async()=>{
       try{
       const req = await fetch(url);
       if(!req.ok) throw Error ("Cant find destination url");
       const conv = await req.json();
       setItems(conv)
-      console.log(setItems)
+      console.log(conv)
         setErrors(null);
       }
       catch(error){
         setErrors(error.message)
+        console.log(error.message)
       }
       finally{
         setLoading(false)
@@ -30,13 +31,24 @@ function App() {
 
     setTimeout(()=>{
       (async()=> await fetchItems())()
-    },2000)
+    })
   },[])
 
   return (
     <div className="App">
       <Header/>
-      <Blog items={items}/>
+      
+      <ul>
+     
+      {items.map((item)=>(  
+        <li className = "contents" key={item.id}>
+          <h2> Title </h2>
+          <label>{item.title} </label>
+          <label>{item.body} </label>
+          </li>
+         
+      ))} </ul>
+      <Blog itemx={items} />
       <Footer/>
     </div>
   )

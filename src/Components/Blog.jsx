@@ -1,15 +1,20 @@
-export default function Blog (){
+export default function Blog({ itemx }) {
   return (
     <div>
-      
-    <h1> Blog</h1>
-    <ul> 
-      <li className="content" >
-        
+      <h1> Blog</h1>
+      <ul>
+        {itemx.map((c)=>{
+(
+  <li key={c.id}>
+    <label> {c.body}</label>
+    <label>{c.title} </label>
 
-        </li>
+    </li>
+)
+        })}
 
-    </ul>
+
+      </ul>
     </div>
-  )
+  );
 }
